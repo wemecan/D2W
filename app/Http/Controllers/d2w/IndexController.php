@@ -19,4 +19,9 @@ class IndexController extends Controller {
         parent::__construct();
     }
 
+    public function index()
+    {
+        return view('login');
+    }
+
 }
