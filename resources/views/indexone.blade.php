@@ -23,7 +23,7 @@
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <div class="text-center">
-                        <a href="index.html" class="logo"><i class="mdi mdi-assistant"></i> 20FA.COM</a>
+                        <a href="/indexone" class="logo"><i class="mdi mdi-assistant"></i> 20FA.COM</a>
                         <!-- <a href="index.html" class="logo"><img src="assets/images/logo.png" height="24" alt="logo"></a> -->
                     </div>
                 </div>
@@ -34,13 +34,13 @@
                         <ul>
 
                             <li>
-                                <a href="index.html" class="waves-effect"><i class="mdi mdi-airplay"></i><span> 数据中心</span></a>
+                                <a href="/indexone" class="waves-effect"><i class="mdi mdi-airplay"></i><span> 数据中心</span></a>
                             </li>
                             <li>
-                                <a href="setting.html" class="waves-effect"><i class="mdi mdi-swap-horizontal"></i><span> 数据转移 </span></a>
+                                <a href="/setting" class="waves-effect"><i class="mdi mdi-swap-horizontal"></i><span> 数据转移 </span></a>
                             </li>
                             <li>
-                                <a href="logout.html" class="waves-effect"><i class="mdi mdi-power"></i><span> 退出登录 </span></a>
+                                <a href="/logout" class="waves-effect"><i class="mdi mdi-power"></i><span> 退出登录 </span></a>
                             </li>
                             
                         </ul>
@@ -133,8 +133,8 @@
                                                 <img src="assets/images/coins/dash.png" alt="" class="rounded-curcle">
                                             </div>
                                             <div class="col-4">
-                                                <h4 class="counter text-dark m-0 pb-1">{{ $credit/9 }}</h4>
-                                                <i class="mdi mdi-arrow-up text-success"></i> <small class="text-success">可提现</small>
+                                                <h4 class="counter text-dark m-0 pb-1">{{ $credit }}</h4>
+                                                <i class="mdi mdi-arrow-up text-success"></i> <small class="text-success">可提现 RMB</small>
                                             </div>
                                         </div>                                                                               
                                     </div>

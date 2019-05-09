@@ -23,7 +23,7 @@
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <div class="text-center">
-                        <a href="index.html" class="logo"><i class="mdi mdi-assistant"></i> 20FA.COM</a>
+                        <a href="/indexone" class="logo"><i class="mdi mdi-assistant"></i> 20FA.COM</a>
                         <!-- <a href="index.html" class="logo"><img src="assets/images/logo.png" height="24" alt="logo"></a> -->
                     </div>
                 </div>
@@ -34,13 +34,13 @@
                         <ul>
 
                             <li>
-                                <a href="index.html" class="waves-effect"><i class="mdi mdi-airplay"></i><span> 数据中心</span></a>
+                                <a href="/indexone" class="waves-effect"><i class="mdi mdi-airplay"></i><span> 数据中心</span></a>
                             </li>
                             <li>
-                                <a href="setting.html" class="waves-effect"><i class="mdi mdi-swap-horizontal"></i><span> 数据迁移 </span></a>
+                                <a href="/setting" class="waves-effect"><i class="mdi mdi-swap-horizontal"></i><span> 数据迁移 </span></a>
                             </li>                            
                             <li>
-                                <a href="logout.html" class="waves-effect"><i class="mdi mdi-power"></i><span> 退出登录 </span></a>
+                                <a href="/logout" class="waves-effect"><i class="mdi mdi-power"></i><span> 退出登录 </span></a>
                             </li>
                             
                         </ul>
@@ -116,22 +116,20 @@
                                     <div class="card bg-white m-b-30">
                                         <div class="card-body">
                                             <div class="general-label">
-                                                <form role="form">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">用户名 (无法更改)</label>
-                                                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Full Name">
+                                                        <input type="text" class="form-control" id="username" placeholder="{{ $username }}" disabled>
                                                     </div>
                                                     
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">邮箱 (无法更改)</label>
-                                                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                                        <input type="email" class="form-control" id="email" placeholder="{{ $email }}" disabled>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">密码</label>
-                                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                                        <input type="password" class="form-control" id="password" placeholder="Password">
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary">确认修改</button>
-                                                </form>                                    
+                                                    <button class="btn btn-primary" onclick="setAccount()">确认修改</button>
                                             </div>
                                         </div>
                                     </div>
@@ -140,23 +138,21 @@
                                     <div class="card bg-white m-b-30">
                                         <div class="card-body">
                                             <div class="general-label">
-                                                <form role="form">
                                                     <div class="form-group">
                                                         <label for="exampleFormControlSelect1">是否保留文章</label>
-                                                        <select class="form-control" id="exampleFormControlSelect1">
+                                                        <select class="form-control" id="is_post">
                                                             <option>否</option>
                                                             <option>是</option>
                                                         </select>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleFormControlSelect1">是否要求删除账户</label>
-                                                        <select class="form-control" id="exampleFormControlSelect2">
+                                                        <select class="form-control" id="is_del">
                                                             <option>否</option>
                                                             <option>是 (慎重)</option>
                                                         </select>
                                                     </div>                                                
-                                                    <button type="submit" class="btn btn-primary">确认修改</button>
-                                                </form>                                    
+                                                    <button class="btn btn-primary" onclick="setType()">确认修改</button>
                                             </div>
                                         </div>
                                     </div>
@@ -167,6 +163,7 @@
                                     <div class="card m-b-30">
                                         <div class="card-body">
                                             <h4 class="mt-0 header-title">迁移账户前您可以选择更改您的账户内容，用户名相同时会在您的用户名后面附加随机字符串，账户迁移后将无法更改</h4>
+                                            <h4 class="mt-0 header-title">tips：修改账户信息时如果您与之前的信息一致会提示修改失败</h4>
                                             <!--<script type="text/javascript" src="https://widgets.cryptocompare.com/serve/v1/coin/histo_week?fsym=BTC&amp;tsym=USD&amp;app=www.cryptocompare.com"></script>-->
                                         </div>
                                     </div>
@@ -188,6 +185,51 @@
         </div>
         <!-- END wrapper -->
 
+        <script>
+            function setType() {
+                $.ajax({
+                    type: 'POST',
+                    url:"{{url('SetType')}}",
+                    data: {
+                        "username": "{{ $username }}",
+                        "is_post": $('#is_post').val(),
+                        "is_del": $('#is_del').val(),
+                        "_token": "{{ csrf_token() }}",
+                    },
+                    success: function (data) {
+                        if (data == 'success') {
+                            alert('修改成功');
+                        }
+                        else alert('修改失败');
+                    },
+                    error: function (reject) {
+                        console.log(reject);
+                    }
+                });
+            }
+
+            function setAccount() {
+                $.ajax({
+                    type: 'POST',
+                    url:"{{url('SetAccount')}}",
+                    data: {
+                        "username": "{{ $username }}",
+                        "email": "{{ $email }}",
+                        "password": $('#password').val(),
+                        "_token": "{{ csrf_token() }}",
+                    },
+                    success: function (data) {
+                        if (data == 'success') {
+                            alert('修改成功');
+                        }
+                        else alert('修改失败，密码需要大于6位且与原密码不一致');
+                    },
+                    error: function (reject) {
+                        console.log(reject);
+                    }
+                });
+            }
+        </script>
 
         <!-- jQuery  -->
         <script src="/assets/js/jquery.min.js"></script>

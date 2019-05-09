@@ -17,7 +17,7 @@
                 <div class="card-body">
 
                     <h3 class="text-center mt-0 m-b-15">
-                        <a href="index.html" class="logo logo-admin"><img src="assets/images/logo.png" height="40" alt="logo"></a>
+                        <a href="/login" class="logo logo-admin"><img src="assets/images/logo.png" height="40" alt="logo"></a>
                     </h3>
 
                     <div class="p-3">
@@ -27,7 +27,7 @@
                         </div>
                         <div class="form-group text-center row m-t-20">
                             <div class="col-12">
-                                <a href="login.html" class="btn btn-danger btn-block waves-effect waves-light text-white">登录</a>
+                                <a href="/login" class="btn btn-danger btn-block waves-effect waves-light text-white">登录</a>
                             </div>
                         </div>
                     </div>  
