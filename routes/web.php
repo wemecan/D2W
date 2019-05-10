@@ -21,3 +21,4 @@ Route::get('/setting', 'd2w\IndexController@setting');
 Route::get('/logout', 'd2w\IndexController@logout');
 Route::post('/SetType', 'd2w\SettingController@SetType');
 Route::post('/SetAccount', 'd2w\SettingController@SetAccount');
+Route::post('/ssssgo', 'd2w\Discuz2wpController@d2w');

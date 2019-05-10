@@ -41,7 +41,7 @@ class SettingController extends IndexController {
         if ($updateRes){
             exit('success');
         }
-        else exit('error');
+        else exit('exit');
     }
 
     public function setAccount(){

@@ -107,7 +107,7 @@
                                                     <li class="list-inline-item"><a href="#"><i class="ti-linkedin text-danger"></i></a></li>
                                                     <li class="list-inline-item"><a href="#"><i class="ti-twitter-alt text-info"></i></a></li>
                                                 </ul>
-                                                <a href="" class="btn btn-primary btn-sm mt-3">开始迁移</a>
+                                                <button class="btn btn-primary btn-sm mt-3" onclick="ssssgo()">开始迁移</button>
                                             </div>
                                         </div>
                                     </div>
@@ -162,8 +162,9 @@
                                 <div class="col-md-12">
                                     <div class="card m-b-30">
                                         <div class="card-body">
-                                            <h4 class="mt-0 header-title">迁移账户前您可以选择更改您的账户内容，用户名相同时会在您的用户名后面附加随机字符串，账户迁移后将无法更改</h4>
-                                            <h4 class="mt-0 header-title">tips：修改账户信息时如果您与之前的信息一致会提示修改失败</h4>
+                                            <h4 class="mt-0 header-title">迁移账户前您可以选择更改您的账户内容，用户名相同时会在您的用户名后面附加随机字符串，账户迁移后将无法更改！</h4>
+                                            <h4 class="mt-0 header-title">tips：修改账户信息时如果您与之前的信息一致会提示修改失败！</h4>
+                                            <h4 class="mt-0 header-title">tips：当您点击开始迁移后请勿进行其他操作，迁移完成后会自动退出登录！</h4>
                                             <!--<script type="text/javascript" src="https://widgets.cryptocompare.com/serve/v1/coin/histo_week?fsym=BTC&amp;tsym=USD&amp;app=www.cryptocompare.com"></script>-->
                                         </div>
                                     </div>
@@ -207,7 +208,31 @@
                     }
                 });
             }
-
+            function ssssgo() {
+                $.ajax({
+                    type: 'POST',
+                    url:"{{url('ssssgo')}}",
+                    data: {
+                        "username": "{{ $username }}",
+                        "_token": "{{ csrf_token() }}",
+                    },
+                    success: function (data) {
+                        if (data == 'success') {
+                            alert('迁移完成');
+                            window.location.href="/logout";
+                        }
+                        else if (data == 'userchange'){
+                            alert('系统检测到您的用户名冲突，已自动替换您的用户名');
+                            $('#username').attr('placeholder','{{ session()->get('username') }}');
+                            window.location.reload();
+                        }
+                        else alert('迁移失败，请联系管理员');
+                    },
+                    error: function (reject) {
+                        console.log(reject);
+                    }
+                });
+            }
             function setAccount() {
                 $.ajax({
                     type: 'POST',

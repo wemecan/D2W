@@ -48,7 +48,7 @@ class IndexController extends Controller {
         $username = session()->get('username');
         $partdata = session()->get('item');
         $is_ok = '已迁移';
-        if ($partdata['is_go'] == 1){
+        if ($partdata['is_go'] == 0){
             $is_ok = '未迁移';
         }
         return view('indexone',[
