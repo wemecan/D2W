@@ -47,16 +47,17 @@ class IndexController extends Controller {
         }
         $username = session()->get('username');
         $partdata = session()->get('item');
+        $post_count = DB::table('pre_forum_post')->where(['authorid'=>$partdata['uid']])->count();
         $is_ok = '已迁移';
         if ($partdata['is_go'] == 0){
             $is_ok = '未迁移';
         }
         return view('indexone',[
             'username' => $username,
-            'credit' => intval($partdata['credit']/9),
-            'post_count' => '102',
+            'credit' => $partdata['credit'],
+            'money' => intval($partdata['credit']/9),
+            'post_count' => $post_count,
             'is_ok' => $is_ok,
-
         ]);
     }
 

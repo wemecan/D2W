@@ -133,7 +133,7 @@
                                                 <img src="assets/images/coins/dash.png" alt="" class="rounded-curcle">
                                             </div>
                                             <div class="col-4">
-                                                <h4 class="counter text-dark m-0 pb-1">{{ $credit }}</h4>
+                                                <h4 class="counter text-dark m-0 pb-1">{{ $money }}</h4>
                                                 <i class="mdi mdi-arrow-up text-success"></i> <small class="text-success">可提现 RMB</small>
                                             </div>
                                         </div>                                                                               

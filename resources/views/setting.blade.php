@@ -226,6 +226,10 @@
                             $('#username').attr('placeholder','{{ session()->get('username') }}');
                             window.location.reload();
                         }
+                        else if(data == 'emailSS'){
+                            alert('系统检测到你的呢邮箱重复，已自动将您的积分信息转移到新站');
+                            window.location.href="/logout";
+                        }
                         else alert('迁移失败，请联系管理员');
                     },
                     error: function (reject) {

@@ -42,7 +42,20 @@ class Discuz2wpController extends IndexController {
         }
         $wp_emdata = DB::table('wp_users')->where('user_email', $partdata['email'])->first();
         if ($wp_emdata){
-            exit('email error');
+            $wp_emdata = json_decode(json_encode($wp_emdata), true);
+            $insertCredit = DB::table('wp_usermeta')->insertGetId([
+                'user_id' => $wp_emdata['ID'],
+                'meta_key' => 'zrz_credit_total',
+                'meta_value' => $partdata['credit']
+            ]);
+            $up_data = DB::table('wp_members')->where([
+                'username' => session()->get('username'),
+            ])->update([
+                'is_go'=> 1
+            ]);
+            if ($insertCredit&&$up_data)exit('emailSS');
+            else exit('email error');
+
         }
         $up_data = DB::table('wp_members')->where([
             'username' => session()->get('username'),
@@ -60,7 +73,14 @@ class Discuz2wpController extends IndexController {
             'user_registered' => date('Y-m-d H:i:s'),
             'display_name'   => $res['username'],
         ]);
-        if ($insertRes){
+
+        // 7B2 主题积分迁移
+        $insertCredit = DB::table('wp_usermeta')->insertGetId([
+            'user_id' => $insertRes,
+            'meta_key' => 'zrz_credit_total',
+            'meta_value' => $partdata['credit']
+        ]);
+        if ($insertRes && $insertCredit){
             exit('success');
         }
         else exit('error');
