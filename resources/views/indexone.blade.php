@@ -226,7 +226,7 @@
                                     <div class="card m-b-30">
                                         <div class="card-body">
                                             <h4 class="mt-0 header-title">迁移说明</h4>                                            
-                                            <a href="#" target="_blank">
+                                            <a href="https://www.20fa.club/announcement/7801.html" target="_blank">
                                                 <div class="calculator-block" style="height:210px">                        
                                                 <div class="calculator-body">                                              
                                                     <!--<script src="https://www.cryptonator.com/ui/js/widget/calc_widget.js"></script>-->
