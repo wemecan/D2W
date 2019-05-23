@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Mail;
 
 class IndexController extends Controller {
     public function __construct(){
@@ -80,6 +81,39 @@ class IndexController extends Controller {
     public function logout(Request $request){
         session()->flush();
         return view('logout');
+    }
+
+    public function forget(Request $request){
+        $data = $_POST;
+        $partdata = DB::table('wp_members')->where(['email'=> $data['email']])->first();
+        $partdata = json_decode(json_encode($partdata), true);
+        if (!isset($partdata['username'])){
+            exit('forget pass email error');
+        }
+        $newPass = rand(00000000,99999999);
+        $is_setpass = DB::table('wp_members')->where(['email'=> $data['email']])->update([
+            'password' => md5(md5($newPass).$partdata['salt']),
+        ]);
+        if (!$is_setpass){
+            exit('pass update error');
+        }
+        $message = '用户名:'.$partdata['username'].'  新密码:'.$newPass;
+        $to = $data['email'];
+        $subject = '请查收您的新密码';
+        Mail::send(
+            'emails',
+            ['content' => $message],
+            function ($message) use($to, $subject) {
+                $message->to($to)->subject($subject);
+            }
+        );
+        if (!Mail::failures()){
+            exit('success');
+        }
+    }
+
+    public function pass(){
+        return view('foget');
     }
 
 }

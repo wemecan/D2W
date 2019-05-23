@@ -37,6 +37,9 @@
                                 <div class="col-12">
                                     <button class="btn btn-danger btn-block waves-effect waves-light" onclick="is_login()">Log In</button>
                                 </div>
+                                <div class="col-12">
+                                    <a href="/pass">忘记密码</a>
+                                </div>
                             </div>
                     </div>
 
